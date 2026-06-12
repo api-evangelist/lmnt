@@ -1,0 +1,61 @@
+spec: API Commons Rate Limits 0.1
+provider: LMNT
+providerId: lmnt
+created: 2026-06-12
+modified: 2026-06-12
+description: >
+  LMNT does not impose concurrency or rate limits on paid plans (Indie, Pro,
+  Premium, and Enterprise). The free tier is subject to usage limits enforced
+  via monthly character quotas. API version 1.1+ adds a request-id header on
+  every response to facilitate debugging and support. Errors use a structured
+  error envelope.
+rateLimits:
+  - name: Free Plan Monthly Character Quota
+    scope: account
+    type: quota
+    limit: 15000
+    unit: characters
+    period: month
+    plans:
+      - Free
+    enforcement:
+      throttled: false
+      description: >
+        Requests beyond the free monthly quota are blocked until the next billing
+        cycle; no overage billing on the free tier.
+  - name: Paid Plan Rate Limiting
+    scope: account
+    type: boolean
+    enforced: false
+    plans:
+      - Indie
+      - Pro
+      - Premium
+      - Enterprise
+    description: >
+      No concurrency or request rate limits are applied to paid plan accounts.
+  - name: Text Input Limit Per Request
+    scope: request
+    type: quota
+    limit: 5000
+    unit: characters
+    period: request
+    description: >
+      Each individual speech synthesis request accepts a maximum of 5,000 characters
+      of input text.
+headers:
+  - name: request-id
+    description: >
+      Unique identifier returned on every API response (API version 1.1+),
+      used for support and debugging.
+    source: response
+  - name: X-API-Key
+    description: API key for authentication, passed as a request header.
+    source: request
+errors:
+  - code: 429
+    description: >
+      Too Many Requests — returned if account-level limits are exceeded. On paid
+      plans this should not be encountered under normal operation.
+    retryAfter: true
+    retryAfterHeader: Retry-After

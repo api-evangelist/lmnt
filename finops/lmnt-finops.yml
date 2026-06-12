@@ -1,0 +1,76 @@
+spec: FinOps Framework 1.0
+focus: FOCUS-aligned
+provider: LMNT
+providerId: lmnt
+created: 2026-06-12
+modified: 2026-06-12
+billingModel: subscription-plus-metered
+description: >
+  LMNT uses a subscription plus metered overage billing model. Each paid plan
+  includes a monthly character allotment billed as a flat subscription fee.
+  Characters consumed beyond the included allotment are billed at a per-1,000-
+  character rate that decreases with higher-tier plans. The free tier provides
+  15,000 characters monthly with no billing.
+focusColumns:
+  - name: ChargeCategory
+    value: Usage
+    description: Primary charge type is usage-based on characters synthesized.
+  - name: ServiceName
+    value: LMNT Speech API
+  - name: ResourceType
+    value: text-to-speech synthesis
+  - name: BillingCurrency
+    value: USD
+  - name: ChargeFrequency
+    value: Monthly
+  - name: PricingUnit
+    value: 1000 characters
+meters:
+  - name: Characters Synthesized
+    unit: characters
+    description: >
+      Total number of text characters submitted for speech synthesis across all
+      API calls within a billing period, including both included allotment and
+      overage consumption.
+    aggregation: sum
+    period: month
+    pricing:
+      - plan: Free
+        included: 15000
+        overageRate: null
+        overageUnit: null
+      - plan: Indie
+        included: 200000
+        overageRate: 0.05
+        overageUnit: per 1,000 characters
+      - plan: Pro
+        included: 1250000
+        overageRate: 0.045
+        overageUnit: per 1,000 characters
+      - plan: Premium
+        included: 5700000
+        overageRate: 0.035
+        overageUnit: per 1,000 characters
+      - plan: Enterprise
+        included: custom
+        overageRate: custom
+        overageUnit: negotiated
+principles:
+  - name: Understand Usage
+    description: >
+      Monitor character consumption via the LMNT usage dashboard at
+      app.lmnt.com to track spend against included allotments and anticipate
+      overage billing.
+  - name: Optimize Rates
+    description: >
+      Upgrade to higher subscription tiers to reduce per-character overage
+      costs; the overage rate drops from $0.05/1K on Indie to $0.035/1K on
+      Premium, providing meaningful savings at scale.
+  - name: Rightsize Subscriptions
+    description: >
+      Choose the subscription tier whose included character volume matches
+      average monthly usage to minimize both over-provisioning and overage costs.
+  - name: Track Requests
+    description: >
+      Leverage the request-id response header (API v1.1+) for per-request cost
+      attribution and troubleshooting in multi-tenant or high-volume environments.

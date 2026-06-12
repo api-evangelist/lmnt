@@ -1,0 +1,82 @@
+aid: lmnt
+name: LMNT
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/lmnt/refs/heads/main/apis.yml
+created: 2026-06-12
+modified: 2026-06-12
+specificationVersion: "0.19"
+description: >
+  LMNT is a text-to-speech API platform delivering ultra-low latency voice synthesis
+  with streaming audio output designed for real-time conversational AI applications.
+  The platform provides a Speech API for standard text-to-speech generation and a
+  Speech Sessions API for WebSocket-based real-time streaming integrated with LLM
+  pipelines, achieving latency under 300 milliseconds. LMNT supports 31 languages
+  and offers voice cloning from as little as five seconds of audio, with its Blizzard 2
+  model optimized for accuracy, expressiveness, and pronunciation. Authentication uses
+  API keys managed via the app dashboard, with SDKs available for Python, TypeScript,
+  and Go.
+tags:
+  - text-to-speech
+  - voice synthesis
+  - voice cloning
+  - audio streaming
+  - conversational AI
+  - low latency
+  - real-time audio
+apis:
+  - name: LMNT Speech API
+    description: >
+      REST API for converting text to speech audio, supporting streaming binary
+      audio output, 31 languages, voice cloning, word timestamps, and configurable
+      expressiveness parameters.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
+    baseURL: https://api.lmnt.com
+    tags:
+      - text-to-speech
+      - audio
+      - streaming
+    properties:
+      - type: Documentation
+        url: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
+  - name: LMNT Speech Sessions API
+    description: >
+      WebSocket-based real-time speech generation API for streaming LLM text output
+      to synthesized audio with reset-latency support for conversational AI
+      applications requiring interrupt handling.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.lmnt.com/api-reference/speech/generate-speech-session
+    baseURL: wss://api.lmnt.com
+    tags:
+      - speech sessions
+      - websocket
+      - real-time
+      - streaming
+    properties:
+      - type: Documentation
+        url: https://docs.lmnt.com/api-reference/speech/generate-speech-session
+common:
+  - type: Website
+    url: https://www.lmnt.com/
+  - type: Documentation
+    url: https://docs.lmnt.com/
+  - type: GitHubOrganization
+    url: https://github.com/lmnt-com
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/lmnt
+  - type: X
+    url: https://x.com/lmnt_com
+  - type: Pricing
+    url: https://www.lmnt.com/pricing
+  - type: Changelog
+    url: https://docs.lmnt.com/changelog/overview
+  - type: Plans
+    url: plans/lmnt-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/lmnt-rate-limits.yml
+  - type: FinOps
+    url: finops/lmnt-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

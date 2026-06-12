@@ -1,0 +1,149 @@
+spec: API Commons Plans 0.1
+provider: LMNT
+providerId: lmnt
+created: 2026-06-12
+modified: 2026-06-12
+reconciled: true
+plans:
+  - name: Free
+    type: free
+    description: >
+      Free tier for developers to explore LMNT's text-to-speech API with a
+      monthly character allowance. No commercial license; unlimited voice clones.
+    url: https://www.lmnt.com/pricing
+    price:
+      amount: 0
+      currency: USD
+      period: month
+    quotas:
+      - name: Monthly Characters
+        type: quota
+        limit: 15000
+        unit: characters
+        period: month
+      - name: Voice Clones
+        type: boolean
+        value: true
+        description: Unlimited voice clones included
+      - name: Commercial License
+        type: boolean
+        value: false
+        description: No commercial use rights on free plan
+  - name: Indie
+    type: freemium
+    description: >
+      Entry-level paid plan for individual developers and small projects requiring
+      commercial use rights and no rate or concurrency limits.
+    url: https://www.lmnt.com/pricing
+    price:
+      amount: 10
+      currency: USD
+      period: month
+    quotas:
+      - name: Monthly Characters Included
+        type: quota
+        limit: 200000
+        unit: characters
+        period: month
+      - name: Overage Rate
+        type: metered
+        price: 0.05
+        unit: per 1,000 characters
+        description: $0.05 per 1K characters beyond monthly allotment
+      - name: Rate Limits
+        type: boolean
+        value: false
+        description: No concurrency or rate limits
+      - name: Voice Clones
+        type: boolean
+        value: true
+        description: Unlimited voice clones
+      - name: Commercial License
+        type: boolean
+        value: true
+  - name: Pro
+    type: paid
+    description: >
+      Mid-tier plan for growing teams and production applications requiring larger
+      monthly character volumes with lower overage rates.
+    url: https://www.lmnt.com/pricing
+    price:
+      amount: 49
+      currency: USD
+      period: month
+    quotas:
+      - name: Monthly Characters Included
+        type: quota
+        limit: 1250000
+        unit: characters
+        period: month
+      - name: Overage Rate
+        type: metered
+        price: 0.045
+        unit: per 1,000 characters
+        description: $0.045 per 1K characters beyond monthly allotment
+      - name: Rate Limits
+        type: boolean
+        value: false
+        description: No concurrency or rate limits
+      - name: Voice Clones
+        type: boolean
+        value: true
+        description: Unlimited voice clones
+      - name: Commercial License
+        type: boolean
+        value: true
+  - name: Premium
+    type: paid
+    description: >
+      High-volume plan for enterprise-scale applications with the largest included
+      character allocation and lowest overage rate of the self-serve tiers.
+    url: https://www.lmnt.com/pricing
+    price:
+      amount: 199
+      currency: USD
+      period: month
+    quotas:
+      - name: Monthly Characters Included
+        type: quota
+        limit: 5700000
+        unit: characters
+        period: month
+      - name: Overage Rate
+        type: metered
+        price: 0.035
+        unit: per 1,000 characters
+        description: $0.035 per 1K characters beyond monthly allotment
+      - name: Rate Limits
+        type: boolean
+        value: false
+        description: No concurrency or rate limits
+      - name: Voice Clones
+        type: boolean
+        value: true
+        description: Unlimited voice clones
+      - name: Commercial License
+        type: boolean
+        value: true
+  - name: Enterprise
+    type: enterprise
+    description: >
+      Custom enterprise plan with volume-negotiated pricing, SLA guarantees, and
+      dedicated support. Contact LMNT sales for pricing.
+    url: https://www.lmnt.com/pricing
+    price:
+      amount: 0
+      currency: USD
+      period: month
+      description: Custom pricing — contact sales
+    quotas:
+      - name: Monthly Characters
+        type: quota
+        description: Custom volume negotiated with sales
+      - name: Rate Limits
+        type: boolean
+        value: false
+        description: No concurrency or rate limits
+      - name: Commercial License
+        type: boolean
+        value: true
