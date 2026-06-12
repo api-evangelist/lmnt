@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lmnt/main/json-schema/lmnt-voice-schema.json",
+  "title": "LMNT Voice",
+  "description": "Schema for a voice object in the LMNT Speech API, representing a system or user-cloned voice available for text-to-speech synthesis.",
+  "type": "object",
+  "required": ["id", "name", "state", "owner", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the voice."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name of the voice."
+    },
+    "state": {
+      "type": "string",
+      "description": "Current lifecycle state of the voice.",
+      "enum": ["preparing", "pending", "training", "ready", "broken", "cancelled"]
+    },
+    "owner": {
+      "type": "string",
+      "description": "Ownership scope of the voice.",
+      "enum": ["system", "me", "all"]
+    },
+    "type": {
+      "type": "string",
+      "description": "Voice cloning type.",
+      "enum": ["instant", "professional", "intrinsic"]
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Optional description of the voice."
+    },
+    "gender": {
+      "type": ["string", "null"],
+      "description": "Gender label associated with the voice."
+    },
+    "starred": {
+      "type": ["boolean", "null"],
+      "description": "Whether the voice is starred/favorited by the user."
+    },
+    "tags": {
+      "type": ["array", "null"],
+      "items": {"type": "string"},
+      "description": "List of tags associated with the voice."
+    },
+    "preview_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "URL to an audio preview of the voice."
+    }
+  }
+}

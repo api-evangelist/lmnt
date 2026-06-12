@@ -1,0 +1,114 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "lmnt": "https://docs.lmnt.com/vocabulary#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Voice": {
+      "@id": "lmnt:Voice",
+      "@type": "@id",
+      "comment": "A voice model available for text-to-speech synthesis in the LMNT platform."
+    },
+    "id": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "lmnt:voiceState",
+      "@type": "xsd:string",
+      "comment": "Lifecycle state of a voice: preparing, pending, training, ready, broken, cancelled."
+    },
+    "owner": {
+      "@id": "lmnt:voiceOwner",
+      "@type": "xsd:string",
+      "comment": "Ownership scope: system, me, or all."
+    },
+    "type": {
+      "@id": "lmnt:voiceType",
+      "@type": "xsd:string",
+      "comment": "Voice cloning type: instant, professional, or intrinsic."
+    },
+    "gender": {
+      "@id": "schema:gender",
+      "@type": "xsd:string"
+    },
+    "starred": {
+      "@id": "lmnt:starred",
+      "@type": "xsd:boolean"
+    },
+    "tags": {
+      "@id": "schema:keywords",
+      "@container": "@set"
+    },
+    "preview_url": {
+      "@id": "schema:audio",
+      "@type": "@id"
+    },
+
+    "SpeechSynthesisRequest": {
+      "@id": "lmnt:SpeechSynthesisRequest",
+      "@type": "@id",
+      "comment": "A request to synthesize text into audio using the LMNT Speech API."
+    },
+    "voice": {
+      "@id": "lmnt:usesVoice",
+      "@type": "xsd:string"
+    },
+    "text": {
+      "@id": "schema:text",
+      "@type": "xsd:string"
+    },
+    "format": {
+      "@id": "schema:encodingFormat",
+      "@type": "xsd:string"
+    },
+    "sample_rate": {
+      "@id": "lmnt:sampleRate",
+      "@type": "xsd:integer"
+    },
+    "speed": {
+      "@id": "lmnt:speechSpeed",
+      "@type": "xsd:decimal"
+    },
+    "temperature": {
+      "@id": "lmnt:speechTemperature",
+      "@type": "xsd:decimal"
+    },
+    "language": {
+      "@id": "schema:inLanguage",
+      "@type": "xsd:string"
+    },
+    "return_timestamps": {
+      "@id": "lmnt:returnTimestamps",
+      "@type": "xsd:boolean"
+    },
+    "conversational": {
+      "@id": "lmnt:conversationalMode",
+      "@type": "xsd:boolean"
+    },
+    "model": {
+      "@id": "lmnt:modelId",
+      "@type": "xsd:string"
+    },
+
+    "SpeechSession": {
+      "@id": "lmnt:SpeechSession",
+      "@type": "@id",
+      "comment": "A WebSocket-based real-time streaming session for text-to-speech generation."
+    },
+
+    "voices": {
+      "@id": "lmnt:voices",
+      "@container": "@list"
+    }
+  }
+}

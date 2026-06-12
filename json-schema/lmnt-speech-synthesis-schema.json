@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lmnt/main/json-schema/lmnt-speech-synthesis-schema.json",
+  "title": "LMNT Speech Synthesis Request",
+  "description": "Schema for a text-to-speech synthesis request to the LMNT Speech API.",
+  "type": "object",
+  "required": ["voice", "text"],
+  "properties": {
+    "voice": {
+      "type": "string",
+      "description": "The ID of the voice to use for synthesis. Use the voices endpoint to list available voices."
+    },
+    "text": {
+      "type": "string",
+      "description": "The text to synthesize into speech.",
+      "maxLength": 5000
+    },
+    "format": {
+      "type": "string",
+      "description": "Audio output format.",
+      "enum": ["mp3", "wav", "webm", "aac"],
+      "default": "mp3"
+    },
+    "sample_rate": {
+      "type": "integer",
+      "description": "Sample rate of the output audio in Hz.",
+      "enum": [8000, 16000, 24000]
+    },
+    "speed": {
+      "type": "number",
+      "description": "Speaking speed multiplier. 1.0 is normal speed.",
+      "minimum": 0.25,
+      "maximum": 2.0,
+      "default": 1.0
+    },
+    "temperature": {
+      "type": "number",
+      "description": "Expressiveness of the synthesized speech. Higher values produce more expressive output.",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "quality": {
+      "type": "string",
+      "description": "Audio quality level for synthesis.",
+      "enum": ["low", "medium", "high"]
+    },
+    "language": {
+      "type": "string",
+      "description": "BCP-47 language tag for the synthesis language. LMNT supports 31 languages.",
+      "examples": ["en", "es", "fr", "de", "ja", "ko", "zh"]
+    },
+    "return_timestamps": {
+      "type": "boolean",
+      "description": "If true, the response includes word-level timestamps.",
+      "default": false
+    },
+    "conversational": {
+      "type": "boolean",
+      "description": "If true, optimizes for conversational speech patterns.",
+      "default": false
+    },
+    "model": {
+      "type": "string",
+      "description": "The LMNT model to use for synthesis. Defaults to the latest Blizzard model.",
+      "examples": ["blizzard-2"]
+    }
+  }
+}

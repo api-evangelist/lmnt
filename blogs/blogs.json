@@ -1,0 +1,11 @@
+{
+  "blogs": [
+    {
+      "name": "LMNT Changelog",
+      "url": "https://docs.lmnt.com/changelog/overview",
+      "rss": null,
+      "last_checked": "2026-06-12",
+      "notes": "No RSS feed detected; changelog is a static documentation page."
+    }
+  ]
+}

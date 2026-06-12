@@ -40,6 +40,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
+      - type: OpenAPI
+        url: openapi/lmnt-speech-openapi.yml
   - name: LMNT Speech Sessions API
     description: >
       WebSocket-based real-time speech generation API for streaming LLM text output
@@ -77,6 +79,16 @@ common:
     url: rate-limits/lmnt-rate-limits.yml
   - type: FinOps
     url: finops/lmnt-finops.yml
+  - type: OpenAPI
+    url: openapi/lmnt-speech-openapi.yml
+  - type: JSONSchema
+    url: json-schema/lmnt-voice-schema.json
+  - type: JSONSchema
+    url: json-schema/lmnt-speech-synthesis-schema.json
+  - type: JSONLDContext
+    url: json-ld/lmnt-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/lmnt-vocabulary.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

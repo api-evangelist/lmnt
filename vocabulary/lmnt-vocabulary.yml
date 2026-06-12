@@ -1,0 +1,128 @@
+vocabulary:
+  name: LMNT API Vocabulary
+  description: Domain terms and concepts for the LMNT Speech API platform.
+  url: https://docs.lmnt.com/
+  version: "1.0"
+  created: "2026-06-12"
+
+terms:
+
+  - term: Voice
+    definition: >
+      A voice model available for text-to-speech synthesis. Voices can be system-provided
+      (intrinsic) or user-created through voice cloning. Each voice has a unique ID, lifecycle
+      state, ownership scope, and optional metadata such as gender, description, and tags.
+    related:
+      - Voice Cloning
+      - Synthesis
+
+  - term: Voice Cloning
+    definition: >
+      The process of creating a custom voice from audio samples. LMNT supports instant cloning
+      from as little as 5 seconds of audio. Professional cloning produces higher-quality results
+      from more training data.
+    related:
+      - Voice
+      - Instant Clone
+      - Professional Clone
+
+  - term: Instant Clone
+    definition: >
+      A rapid voice cloning type that can generate a custom voice from minimal audio input
+      (as little as 5 seconds). Trades some quality for speed of creation.
+    related:
+      - Voice Cloning
+      - Professional Clone
+
+  - term: Professional Clone
+    definition: >
+      A high-quality voice cloning type that requires more audio input but produces a more
+      accurate and expressive representation of the target voice.
+    related:
+      - Voice Cloning
+      - Instant Clone
+
+  - term: Synthesis
+    definition: >
+      The process of converting text input into spoken audio using a selected voice model.
+      LMNT synthesis supports streaming binary output, word timestamps, and multiple audio formats.
+    related:
+      - Voice
+      - Speech Session
+      - Text-to-Speech
+
+  - term: Speech Session
+    definition: >
+      A WebSocket-based real-time streaming connection for text-to-speech generation optimized
+      for LLM pipeline integration. Speech sessions support reset-latency handling for
+      conversational AI interrupt scenarios.
+    related:
+      - Synthesis
+      - WebSocket
+      - Streaming
+
+  - term: Blizzard 2
+    definition: >
+      LMNT's production text-to-speech model optimized for accuracy, expressiveness, and
+      pronunciation. The model achieves sub-300ms latency for real-time conversational AI use cases.
+    related:
+      - Synthesis
+      - Model
+
+  - term: Sample Rate
+    definition: >
+      The number of audio samples per second in the synthesized output, measured in Hz.
+      LMNT supports 8000 Hz, 16000 Hz, and 24000 Hz sample rates.
+    related:
+      - Synthesis
+      - Audio Format
+
+  - term: Temperature
+    definition: >
+      A parameter controlling the expressiveness of synthesized speech. Higher temperature
+      values produce more varied and expressive output; lower values produce more consistent,
+      monotone delivery.
+    related:
+      - Synthesis
+      - Speed
+
+  - term: Speed
+    definition: >
+      A multiplier applied to the speaking rate of synthesized speech. A value of 1.0 is
+      normal speed; values below 1.0 slow speech down and values above 1.0 speed it up.
+      Typical range is 0.25 to 2.0.
+    related:
+      - Synthesis
+      - Temperature
+
+  - term: Word Timestamps
+    definition: >
+      Optional metadata returned alongside synthesized audio indicating the start and end
+      time of each word in the output. Useful for caption generation and lip-sync applications.
+    related:
+      - Synthesis
+
+  - term: Streaming Audio
+    definition: >
+      Audio output delivered progressively as it is generated, rather than waiting for the
+      full synthesis to complete. LMNT supports streaming binary audio for both REST and
+      WebSocket endpoints.
+    related:
+      - Speech Session
+      - Synthesis
+
+  - term: API Key
+    definition: >
+      The authentication credential used to access LMNT APIs. API keys are managed via the
+      LMNT app dashboard and passed in the X-API-Key request header.
+    related:
+      - Authentication
+
+  - term: Reset Latency
+    definition: >
+      A feature of LMNT Speech Sessions that allows an in-progress synthesis stream to be
+      cancelled and restarted quickly, enabling natural interrupt handling in conversational
+      AI applications.
+    related:
+      - Speech Session
+      - Streaming Audio

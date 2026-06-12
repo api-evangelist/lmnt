@@ -1,0 +1,1702 @@
+openapi: 3.0.3
+info:
+  title: LMNT Speech API
+  description: REST API for converting text to speech audio, supporting streaming binary audio output, 31 languages, voice
+    cloning, word timestamps, and configurable expressiveness parameters.
+  version: '1.1'
+  termsOfService: https://www.lmnt.com/terms
+  contact:
+    name: LMNT Support
+    url: https://docs.lmnt.com/
+    email: support@lmnt.com
+  license:
+    name: Proprietary
+    url: https://www.lmnt.com/terms
+  x-api-id: lmnt-speech-api
+  x-audience: public
+servers:
+- url: https://api.lmnt.com
+  description: LMNT Production API
+security:
+- ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key obtained from the LMNT dashboard at https://app.lmnt.com
+  schemas:
+    AccountResponse:
+      properties:
+        plan:
+          $ref: '#/components/schemas/PlanInfo'
+        usage:
+          $ref: '#/components/schemas/UsageInfo'
+        apikeys:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ApiKeyInfo'
+            type: array
+          - type: 'null'
+          title: Apikeys
+        accepted_tos:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Accepted Tos
+        sub_state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sub State
+        cancel_at_period_end:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Cancel At Period End
+      type: object
+      required:
+      - plan
+      - usage
+      title: AccountResponse
+      description: Account information returned to users.
+    AlertingResponse:
+      properties:
+        red_alerts:
+          items:
+            type: string
+          type: array
+          title: Red Alerts
+      type: object
+      required:
+      - red_alerts
+      title: AlertingResponse
+    ApiKeyInfo:
+      properties:
+        masked:
+          type: string
+          title: Masked
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        created_at:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Created At
+      type: object
+      required:
+      - masked
+      title: ApiKeyInfo
+    ApiKeyNameRequest:
+      properties:
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - name
+      title: ApiKeyNameRequest
+    ApiKeyResponse:
+      properties:
+        apikey:
+          type: string
+          title: Apikey
+        masked:
+          type: string
+          title: Masked
+      type: object
+      required:
+      - apikey
+      - masked
+      title: ApiKeyResponse
+    ApiKeyTargetIntegration:
+      type: string
+      enum:
+      - heygen
+      - pipecat
+      - vapi
+      title: ApiKeyTargetIntegration
+      description: Represents a target integration for API keys.
+    AppliedDiscount:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+      type: object
+      required:
+      - name
+      - description
+      title: AppliedDiscount
+    BillingOverviewResponse:
+      properties:
+        subscription:
+          $ref: '#/components/schemas/SubscriptionResponse'
+        payment_method:
+          anyOf:
+          - $ref: '#/components/schemas/PaymentMethodResponse'
+          - type: 'null'
+        invoices:
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+          type: array
+          title: Invoices
+          default: []
+      type: object
+      required:
+      - subscription
+      title: BillingOverviewResponse
+    Body_create_handler_v1_ai_voice_post:
+      properties:
+        file:
+          anyOf:
+          - type: string
+            format: binary
+          - type: 'null'
+          title: File
+        files:
+          anyOf:
+          - items:
+              type: string
+              format: binary
+            type: array
+          - type: 'null'
+          title: Files
+        files[]:
+          anyOf:
+          - items:
+              type: string
+              format: binary
+            type: array
+          - type: 'null'
+          title: Files[]
+        file_field:
+          anyOf:
+          - items:
+              type: string
+              format: binary
+            type: array
+          - type: 'null'
+          title: File Field
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        type:
+          anyOf:
+          - type: string
+            enum:
+            - instant
+            - professional
+            - intrinsic
+          - type: 'null'
+          title: Type
+          default: instant
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        gender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Gender
+          default: U
+        tags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tags
+        enhance:
+          type: boolean
+          title: Enhance
+          default: false
+        metadata:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Metadata
+        filter:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Filter
+          default: false
+        accent:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Accent
+      type: object
+      title: Body_create_handler_v1_ai_voice_post
+    Body_feedback_handler_v1_ai_speech_feedback_post:
+      properties:
+        id:
+          type: string
+          title: Id
+        rating:
+          type: string
+          enum:
+          - thumbsUp
+          - thumbsDown
+          title: Rating
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+        context:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Context
+      type: object
+      required:
+      - id
+      - rating
+      title: Body_feedback_handler_v1_ai_speech_feedback_post
+    Body_handle_env_var_request_v1_account_vercel_env_vars_post:
+      properties:
+        config_id:
+          type: string
+          title: Config Id
+        add_project_names:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Add Project Names
+        remove_projects:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Remove Projects
+      type: object
+      required:
+      - config_id
+      title: Body_handle_env_var_request_v1_account_vercel_env_vars_post
+    Body_handle_project_request_v1_account_vercel_projects_post:
+      properties:
+        config_id:
+          type: string
+          title: Config Id
+        code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code
+      type: object
+      required:
+      - config_id
+      title: Body_handle_project_request_v1_account_vercel_projects_post
+    Body_precheck_clone_handler_v1_ai_voice_precheck_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_precheck_clone_handler_v1_ai_voice_precheck_post
+    Body_set_email_prefs_handler_v1_account_set_email_prefs_post:
+      properties:
+        wants_email:
+          type: boolean
+          title: Wants Email
+      type: object
+      required:
+      - wants_email
+      title: Body_set_email_prefs_handler_v1_account_set_email_prefs_post
+    CancelResponse:
+      properties:
+        cancel_at:
+          type: integer
+          title: Cancel At
+      type: object
+      required:
+      - cancel_at
+      title: CancelResponse
+    ChangePlanRequest:
+      properties:
+        price_id:
+          type: string
+          title: Price Id
+      type: object
+      required:
+      - price_id
+      title: ChangePlanRequest
+    ChangePlanResponse:
+      properties:
+        kind:
+          type: string
+          enum:
+          - upgraded
+          - downgrade_scheduled
+          title: Kind
+        effective_at:
+          type: integer
+          title: Effective At
+      type: object
+      required:
+      - kind
+      - effective_at
+      title: ChangePlanResponse
+    Clip:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        voice:
+          type: string
+          title: Voice
+        timestamp:
+          type: integer
+          title: Timestamp
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+        speed:
+          anyOf:
+          - type: number
+            maximum: 2.0
+            minimum: 0.25
+          - type: 'null'
+          title: Speed
+        language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Language
+        debug:
+          type: boolean
+          title: Debug
+          default: false
+      type: object
+      required:
+      - url
+      - voice
+      - timestamp
+      title: Clip
+    ClipsResponse:
+      properties:
+        clips:
+          items:
+            $ref: '#/components/schemas/Clip'
+          type: array
+          title: Clips
+        page:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Page
+        page_size:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Page Size
+        total_clips:
+          type: integer
+          minimum: 0.0
+          title: Total Clips
+        total_pages:
+          type: integer
+          minimum: 0.0
+          title: Total Pages
+      type: object
+      required:
+      - clips
+      - page
+      - page_size
+      - total_clips
+      - total_pages
+      title: ClipsResponse
+    DailyUsageHistoryItem:
+      properties:
+        api_chars_used:
+          type: integer
+          minimum: 0.0
+          title: Api Chars Used
+        playground_chars_used:
+          type: integer
+          minimum: 0.0
+          title: Playground Chars Used
+        day:
+          type: string
+          format: date
+          title: Day
+      type: object
+      required:
+      - api_chars_used
+      - playground_chars_used
+      - day
+      title: DailyUsageHistoryItem
+    DeleteVoiceResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: DeleteVoiceResponse
+    FeedbackResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: FeedbackResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    InvoiceItem:
+      properties:
+        id:
+          type: string
+          title: Id
+        number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Number
+        amount_paid:
+          type: integer
+          title: Amount Paid
+        currency:
+          type: string
+          title: Currency
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+        created:
+          type: integer
+          title: Created
+        hosted_invoice_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hosted Invoice Url
+        invoice_pdf:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Invoice Pdf
+      type: object
+      required:
+      - id
+      - amount_paid
+      - currency
+      - created
+      title: InvoiceItem
+    OAuthProvider:
+      type: string
+      enum:
+      - auth0
+      - github
+      - google
+      - microsoft
+      title: OAuthProvider
+    OAuthValidateResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          title: Email
+        profile_picture:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Profile Picture
+      type: object
+      required:
+      - id
+      - name
+      - email
+      title: OAuthValidateResponse
+    PaymentMethodResponse:
+      properties:
+        brand:
+          type: string
+          title: Brand
+        last4:
+          type: string
+          title: Last4
+      type: object
+      required:
+      - brand
+      - last4
+      title: PaymentMethodResponse
+    PlanInfo:
+      properties:
+        type:
+          type: string
+          title: Type
+        commercial_use_allowed:
+          type: boolean
+          title: Commercial Use Allowed
+        character_limit:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Character Limit
+      type: object
+      required:
+      - type
+      - commercial_use_allowed
+      title: PlanInfo
+      description: Plan information returned to users.
+    PrecheckCloneResponse:
+      properties:
+        dnsmos:
+          type: number
+          title: Dnsmos
+        start_s:
+          type: number
+          title: Start S
+        end_s:
+          type: number
+          title: End S
+      type: object
+      required:
+      - dnsmos
+      - start_s
+      - end_s
+      title: PrecheckCloneResponse
+    Product:
+      properties:
+        name:
+          type: string
+          title: Name
+        price_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price Id
+        monthly_cost:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Monthly Cost
+        additional_unit_cost:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Additional Unit Cost
+        char_limit:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Char Limit
+        chars_per_unit:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Chars Per Unit
+      type: object
+      required:
+      - name
+      title: Product
+    ReplacePaymentMethodRequest:
+      properties:
+        payment_method_id:
+          type: string
+          title: Payment Method Id
+      type: object
+      required:
+      - payment_method_id
+      title: ReplacePaymentMethodRequest
+    SampleRate:
+      type: integer
+      enum:
+      - 8000
+      - 16000
+      - 24000
+      title: SampleRate
+    ScheduledChange:
+      properties:
+        price_id:
+          type: string
+          title: Price Id
+        plan_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Plan Name
+        effective_at:
+          type: integer
+          title: Effective At
+      type: object
+      required:
+      - price_id
+      - effective_at
+      title: ScheduledChange
+    SessionInfo:
+      properties:
+        id:
+          type: string
+          title: Id
+        device_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Label
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        created_at:
+          type: integer
+          title: Created At
+        updated_at:
+          type: integer
+          title: Updated At
+        current:
+          type: boolean
+          title: Current
+          default: false
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: SessionInfo
+      description: 'An active session row, returned to the user''s account page.
+
+
+        `current` is server-tagged: true when this row''s id matches the request''s `lmnt-auth0`
+
+        cookie. The cookie is httpOnly so the browser can''t compute this itself.
+
+
+        IP is stored server-side for audit but never returned to the user.'
+    SessionListResponse:
+      properties:
+        sessions:
+          items:
+            $ref: '#/components/schemas/SessionInfo'
+          type: array
+          title: Sessions
+      type: object
+      required:
+      - sessions
+      title: SessionListResponse
+    SetupIntentResponse:
+      properties:
+        client_secret:
+          type: string
+          title: Client Secret
+      type: object
+      required:
+      - client_secret
+      title: SetupIntentResponse
+    SubscribeRequest:
+      properties:
+        price_id:
+          type: string
+          title: Price Id
+      type: object
+      required:
+      - price_id
+      title: SubscribeRequest
+    SubscribeResponse:
+      properties:
+        subscription_id:
+          type: string
+          title: Subscription Id
+        client_secret:
+          type: string
+          title: Client Secret
+        amount:
+          type: integer
+          title: Amount
+        currency:
+          type: string
+          title: Currency
+        applied_discount:
+          anyOf:
+          - $ref: '#/components/schemas/AppliedDiscount'
+          - type: 'null'
+      type: object
+      required:
+      - subscription_id
+      - client_secret
+      - amount
+      - currency
+      title: SubscribeResponse
+    SubscriptionResponse:
+      properties:
+        price_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price Id
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+        current_period_end:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Current Period End
+        cancel_at_period_end:
+          type: boolean
+          title: Cancel At Period End
+          default: false
+        scheduled_change:
+          anyOf:
+          - $ref: '#/components/schemas/ScheduledChange'
+          - type: 'null'
+      type: object
+      title: SubscriptionResponse
+    SuccessResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: SuccessResponse
+    UncancelResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: UncancelResponse
+    UnderstandableHaveANiceDay:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: UnderstandableHaveANiceDay
+    UpdateVoiceRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        gender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Gender
+        starred:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Starred
+        tags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tags
+      type: object
+      title: UpdateVoiceRequest
+    UpdateVoiceResponse:
+      properties:
+        voice:
+          $ref: '#/components/schemas/Voice'
+      type: object
+      required:
+      - voice
+      title: UpdateVoiceResponse
+    UsageHistoryItem:
+      properties:
+        plan:
+          type: string
+          title: Plan
+        period_end:
+          type: integer
+          title: Period End
+        chars_used:
+          type: integer
+          minimum: 0.0
+          title: Chars Used
+        playground_chars_used:
+          type: integer
+          minimum: 0.0
+          title: Playground Chars Used
+          default: 0
+      type: object
+      required:
+      - plan
+      - period_end
+      - chars_used
+      title: UsageHistoryItem
+    UsageInfo:
+      properties:
+        characters:
+          type: integer
+          minimum: 0.0
+          title: Characters
+          default: 0
+        playground_characters:
+          type: integer
+          minimum: 0.0
+          title: Playground Characters
+          default: 0
+        credit_characters:
+          type: integer
+          minimum: 0.0
+          title: Credit Characters
+          default: 0
+        instant_voices:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Instant Voices
+          default: 0
+        professional_voices:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Professional Voices
+          default: 0
+        period_end:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Period End
+      type: object
+      title: UsageInfo
+      description: Usage information returned to users.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    VercelEnvVarResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: VercelEnvVarResponse
+    VercelProject:
+      properties:
+        name:
+          type: string
+          title: Name
+      additionalProperties: true
+      type: object
+      required:
+      - name
+      title: VercelProject
+      description: A Vercel project fetched from the Vercel API.
+    VercelProjectResponse:
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/VercelProject'
+          type: array
+          title: Projects
+      type: object
+      required:
+      - projects
+      title: VercelProjectResponse
+    Voice:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        state:
+          type: string
+          enum:
+          - preparing
+          - pending
+          - training
+          - ready
+          - broken
+          - cancelled
+          title: State
+        owner:
+          type: string
+          enum:
+          - system
+          - me
+          - all
+          title: Owner
+        type:
+          type: string
+          enum:
+          - instant
+          - professional
+          - intrinsic
+          title: Type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        gender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Gender
+        starred:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Starred
+        tags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tags
+        preview_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Preview Url
+      type: object
+      required:
+      - id
+      - name
+      - state
+      - owner
+      - type
+      title: Voice
+paths:
+  /v1/ai/speech:
+    get:
+      summary: Get Handler
+      operationId: get_handler_v1_ai_speech_get
+      parameters:
+      - name: speed
+        in: query
+        required: false
+        schema:
+          type: number
+          maximum: 2.0
+          minimum: 0.25
+          default: 1.0
+          title: Speed
+      - name: conversational
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Conversational
+      - name: temperature
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+            maximum: 5.0
+            minimum: 0.0001
+          - type: 'null'
+          title: Temperature
+      - name: top_k
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Top K
+      - name: top_p
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+            maximum: 1.0
+            minimum: 0.0
+          - type: 'null'
+          title: Top P
+      - name: length
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+            maximum: 300.0
+            minimum: 0.1
+          - type: 'null'
+          title: Length
+      - name: expressive
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Expressive
+      - name: quality
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Quality
+      - name: solver
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Solver
+      - name: text
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Text
+      - name: voice
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Voice
+      - name: model
+        in: query
+        required: false
+        schema:
+          enum:
+          - aurora
+          - blizzard
+          - blizzard-dialogue
+          type: string
+          default: aurora
+          title: Model
+      - name: language
+        in: query
+        required: false
+        schema:
+          type: string
+          default: auto
+          title: Language
+      - name: format
+        in: query
+        required: false
+        schema:
+          enum:
+          - aac
+          - mp3
+          - raw
+          - wav
+          - ulaw
+          - webm
+          - pcm_s16le
+          - pcm_f32le
+          type: string
+          default: mp3
+          title: Format
+      - name: sample_rate
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/SampleRate'
+          - type: 'null'
+          title: Sample Rate
+      - name: seed
+        in: query
+        required: false
+        schema:
+          type: integer
+          title: Seed
+      - name: return_timestamps
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Return Timestamps
+      - name: delay_headers
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Delay Headers
+      - name: debug
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Debug
+      - name: original_text
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Original Text
+      - name: original_language
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Original Language
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      summary: Post Handler
+      operationId: post_handler_v1_ai_speech_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/ai/speech/bytes:
+    post:
+      summary: Bytes Post Handler
+      operationId: bytes_post_handler_v1_ai_speech_bytes_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/ai/speech/feedback:
+    post:
+      summary: Feedback Handler
+      operationId: feedback_handler_v1_ai_speech_feedback_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_feedback_handler_v1_ai_speech_feedback_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/ai/voice/list:
+    get:
+      summary: List Handler
+      operationId: list_handler_v1_ai_voice_list_get
+      parameters:
+      - name: starred
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Starred
+      - name: owner
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - system
+            - me
+            - all
+            type: string
+          - type: 'null'
+          title: Owner
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Voice'
+                title: Response List Handler V1 Ai Voice List Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/ai/voice/{id}:
+    get:
+      summary: Get Handler
+      operationId: get_handler_v1_ai_voice__id__get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Voice'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      summary: Update Handler
+      description: 'If a user tries to update a voice that is not owned by them, this call will return an error unless ''starred''
+        is
+
+        one of the present parameters. The user will be able to star/unstar voices that do not belong to them, but their
+
+        other changes will not be recorded.'
+      operationId: update_handler_v1_ai_voice__id__put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVoiceRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVoiceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      summary: Delete Handler
+      operationId: delete_handler_v1_ai_voice__id__delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVoiceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/ai/voice:
+    post:
+      summary: Create Handler
+      operationId: create_handler_v1_ai_voice_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_create_handler_v1_ai_voice_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Voice'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/ai/voice/{id}/preview:
+    get:
+      summary: Preview Handler
+      operationId: preview_handler_v1_ai_voice__id__preview_get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/ai/voice/precheck:
+    post:
+      summary: Precheck Clone Handler
+      operationId: precheck_clone_handler_v1_ai_voice_precheck_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_precheck_clone_handler_v1_ai_voice_precheck_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrecheckCloneResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /speech/beta/synthesize:
+    post:
+      summary: Synthesize Beta Handler
+      operationId: synthesize_beta_handler_speech_beta_synthesize_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /speech/beta/voices:
+    get:
+      summary: List Beta Handler
+      operationId: list_beta_handler_speech_beta_voices_get
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response List Beta Handler Speech Beta Voices Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /health_check:
+    get:
+      summary: Health Check
+      operationId: health_check_health_check_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}

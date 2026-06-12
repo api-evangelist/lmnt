@@ -1,0 +1,28 @@
+{
+  "voices": [
+    {
+      "id": "aurora",
+      "name": "Aurora",
+      "state": "ready",
+      "owner": "system",
+      "type": "intrinsic",
+      "description": "A warm and engaging female voice suitable for conversational AI applications.",
+      "gender": "female",
+      "starred": false,
+      "tags": ["conversational", "warm", "english"],
+      "preview_url": "https://storage.lmnt.com/voices/aurora/preview.mp3"
+    },
+    {
+      "id": "orion",
+      "name": "Orion",
+      "state": "ready",
+      "owner": "system",
+      "type": "intrinsic",
+      "description": "A clear and authoritative male voice for professional applications.",
+      "gender": "male",
+      "starred": false,
+      "tags": ["professional", "clear", "english"],
+      "preview_url": "https://storage.lmnt.com/voices/orion/preview.mp3"
+    }
+  ]
+}
