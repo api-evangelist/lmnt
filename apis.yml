@@ -1,7 +1,7 @@
 aid: lmnt
 name: LMNT
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/lmnt/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: 2026-06-12
@@ -30,7 +30,7 @@ apis:
       REST API for converting text to speech audio, supporting streaming binary
       audio output, 31 languages, voice cloning, word timestamps, and configurable
       expressiveness parameters.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
     baseURL: https://api.lmnt.com
     tags:
@@ -47,7 +47,7 @@ apis:
       WebSocket-based real-time speech generation API for streaming LLM text output
       to synthesized audio with reset-latency support for conversational AI
       applications requiring interrupt handling.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.lmnt.com/api-reference/speech/generate-speech-session
     baseURL: wss://api.lmnt.com
     tags:
