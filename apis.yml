@@ -71,7 +71,7 @@ common:
     url: https://x.com/lmnt_com
   - type: Pricing
     url: https://www.lmnt.com/pricing
-  - type: Changelog
+  - type: ChangeLog
     url: https://docs.lmnt.com/changelog/overview
   - type: Plans
     url: plans/lmnt-plans-pricing.yml
