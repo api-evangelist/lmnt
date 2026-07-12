@@ -59,6 +59,12 @@ apis:
       - type: Documentation
         url: https://docs.lmnt.com/api-reference/speech/generate-speech-session
 common:
+  - type: TrustCenter
+    url: security/lmnt-trust-center.yml
+  - type: DomainSecurity
+    url: security/lmnt-domain-security.yml
+  - type: Authentication
+    url: authentication/lmnt-authentication.yml
   - type: Website
     url: https://www.lmnt.com/
   - type: Documentation
