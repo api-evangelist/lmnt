@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: LMNT Speech Ai Health Check API
+  description: REST API for converting text to speech audio, supporting streaming binary audio output, 31 languages, voice cloning, word timestamps, and configurable expressiveness parameters.
+  version: '1.1'
+  termsOfService: https://www.lmnt.com/terms
+  contact:
+    name: LMNT Support
+    url: https://docs.lmnt.com/
+    email: support@lmnt.com
+  license:
+    name: Proprietary
+    url: https://www.lmnt.com/terms
+  x-api-id: lmnt-speech-api
+  x-audience: public
+servers:
+- url: https://api.lmnt.com
+  description: LMNT Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Health Check
+paths:
+  /health_check:
+    get:
+      summary: Health Check
+      operationId: health_check_health_check_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Health Check
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key obtained from the LMNT dashboard at https://app.lmnt.com

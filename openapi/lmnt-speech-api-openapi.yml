@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: LMNT Ai Speech API
+  description: REST API for converting text to speech audio, supporting streaming binary audio output, 31 languages, voice cloning, word timestamps, and configurable expressiveness parameters.
+  version: '1.1'
+  termsOfService: https://www.lmnt.com/terms
+  contact:
+    name: LMNT Support
+    url: https://docs.lmnt.com/
+    email: support@lmnt.com
+  license:
+    name: Proprietary
+    url: https://www.lmnt.com/terms
+  x-api-id: lmnt-speech-api
+  x-audience: public
+servers:
+- url: https://api.lmnt.com
+  description: LMNT Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Speech
+paths:
+  /speech/beta/synthesize:
+    post:
+      summary: Synthesize Beta Handler
+      operationId: synthesize_beta_handler_speech_beta_synthesize_post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Speech
+  /speech/beta/voices:
+    get:
+      summary: List Beta Handler
+      operationId: list_beta_handler_speech_beta_voices_get
+      parameters:
+      - name: x-api-key
+        in: header
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: X-Api-Key
+      - name: lmnt-auth0
+        in: cookie
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lmnt-Auth0
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response List Beta Handler Speech Beta Voices Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Speech
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key obtained from the LMNT dashboard at https://app.lmnt.com
