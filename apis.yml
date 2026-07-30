@@ -1,7 +1,20 @@
 aid: lmnt
 name: LMNT
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lmnt.png
 url: https://raw.githubusercontent.com/api-evangelist/lmnt/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: 2026-06-12
@@ -25,39 +38,57 @@ tags:
   - low latency
   - real-time audio
 apis:
-  - name: LMNT Speech API
-    description: >
-      REST API for converting text to speech audio, supporting streaming binary
-      audio output, 31 languages, voice cloning, word timestamps, and configurable
-      expressiveness parameters.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
-    baseURL: https://api.lmnt.com
-    tags:
-      - text-to-speech
-      - audio
-      - streaming
-    properties:
-      - type: Documentation
-        url: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
-      - type: OpenAPI
-        url: openapi/lmnt-speech-openapi.yml
-  - name: LMNT Speech Sessions API
-    description: >
-      WebSocket-based real-time speech generation API for streaming LLM text output
-      to synthesized audio with reset-latency support for conversational AI
-      applications requiring interrupt handling.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.lmnt.com/api-reference/speech/generate-speech-session
-    baseURL: wss://api.lmnt.com
-    tags:
-      - speech sessions
-      - websocket
-      - real-time
-      - streaming
-    properties:
-      - type: Documentation
-        url: https://docs.lmnt.com/api-reference/speech/generate-speech-session
+- name: LMNT Speech Sessions API
+  description: >
+    WebSocket-based real-time speech generation API for streaming LLM text output to synthesized audio
+    with reset-latency support for conversational AI applications requiring interrupt handling.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.lmnt.com/api-reference/speech/generate-speech-session
+  baseURL: wss://api.lmnt.com
+  tags:
+  - speech sessions
+  - websocket
+  - real-time
+  - streaming
+  properties:
+  - type: Documentation
+    url: https://docs.lmnt.com/api-reference/speech/generate-speech-session
+- aid: lmnt:lmnt-ai-api
+  name: LMNT Ai API
+  description: The Ai API from LMNT — 8 operation(s) for ai.
+  humanURL: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
+  baseURL: https://api.lmnt.com
+  tags:
+  - Ai
+  properties:
+  - type: OpenAPI
+    url: openapi/lmnt-ai-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
+- aid: lmnt:lmnt-health-check-api
+  name: LMNT Health Check API
+  description: The Health Check API from LMNT — 1 operation(s) for health check.
+  humanURL: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
+  baseURL: https://api.lmnt.com
+  tags:
+  - Health Check
+  properties:
+  - type: OpenAPI
+    url: openapi/lmnt-health-check-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
+- aid: lmnt:lmnt-speech-api
+  name: LMNT Speech API
+  description: The Speech API from LMNT — 2 operation(s) for speech.
+  humanURL: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
+  baseURL: https://api.lmnt.com
+  tags:
+  - Speech
+  properties:
+  - type: OpenAPI
+    url: openapi/lmnt-speech-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
 common:
   - type: AgenticAccess
     url: agentic-access/lmnt-agentic-access.yml
