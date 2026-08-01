@@ -1,0 +1,18 @@
+{
+  "provider": "lmnt",
+  "sources": [
+    "lmnt-ai-api-openapi.yml",
+    "lmnt-health-check-api-openapi.yml",
+    "lmnt-speech-api-openapi.yml"
+  ],
+  "outputs": [
+    "lmnt-ai-api-openapi.yml",
+    "lmnt-health-check-api-openapi.yml",
+    "lmnt-speech-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
