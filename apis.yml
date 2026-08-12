@@ -119,7 +119,7 @@ common:
   - type: FinOps
     url: finops/lmnt-finops.yml
   - type: OpenAPI
-    url: openapi/lmnt-speech-openapi.yml
+    url: openapi/_original/lmnt-speech-openapi.yml
   - type: JSONSchema
     url: json-schema/lmnt-voice-schema.json
   - type: JSONSchema
