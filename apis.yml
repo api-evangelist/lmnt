@@ -18,7 +18,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lmnt.png
 url: https://raw.githubusercontent.com/api-evangelist/lmnt/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: 2026-06-12
-specificationVersion: "0.19"
+specificationVersion: '0.23'
 description: >
   LMNT is a text-to-speech API platform delivering ultra-low latency voice synthesis
   with streaming audio output designed for real-time conversational AI applications.
