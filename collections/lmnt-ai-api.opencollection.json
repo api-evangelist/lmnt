@@ -1,0 +1,370 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LMNT Speech Ai API",
+    "version": "1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ai",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lmnt.com/v1/ai/speech",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "speed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "conversational",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "temperature",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top_k",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "top_p",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "expressive",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "quality",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "solver",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "text",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "voice",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "model",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sample_rate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "seed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "return_timestamps",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "delay_headers",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "debug",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "original_text",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "original_language",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Handler"
+        },
+        {
+          "info": {
+            "name": "Post Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lmnt.com/v1/ai/speech",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Post Handler"
+        },
+        {
+          "info": {
+            "name": "Bytes Post Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lmnt.com/v1/ai/speech/bytes",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Bytes Post Handler"
+        },
+        {
+          "info": {
+            "name": "Feedback Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lmnt.com/v1/ai/speech/feedback",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Feedback Handler"
+        },
+        {
+          "info": {
+            "name": "List Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lmnt.com/v1/ai/voice/list",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "starred",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Handler"
+        },
+        {
+          "info": {
+            "name": "Get Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lmnt.com/v1/ai/voice/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Handler"
+        },
+        {
+          "info": {
+            "name": "Update Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lmnt.com/v1/ai/voice/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If a user tries to update a voice that is not owned by them, this call will return an error unless 'starred' is\none of the present parameters. The user will be able to star/unstar voices that do not belong to them, but their\nother changes will not be recorded."
+        },
+        {
+          "info": {
+            "name": "Delete Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.lmnt.com/v1/ai/voice/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Handler"
+        },
+        {
+          "info": {
+            "name": "Create Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lmnt.com/v1/ai/voice",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Create Handler"
+        },
+        {
+          "info": {
+            "name": "Preview Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lmnt.com/v1/ai/voice/:id/preview",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Preview Handler"
+        },
+        {
+          "info": {
+            "name": "Precheck Clone Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lmnt.com/v1/ai/voice/precheck",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Precheck Clone Handler"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

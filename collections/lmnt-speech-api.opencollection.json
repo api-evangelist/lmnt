@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LMNT Ai Speech API",
+    "version": "1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Speech",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Synthesize Beta Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lmnt.com/speech/beta/synthesize",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Synthesize Beta Handler"
+        },
+        {
+          "info": {
+            "name": "List Beta Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lmnt.com/speech/beta/voices",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List Beta Handler"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
