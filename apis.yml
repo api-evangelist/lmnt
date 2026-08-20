@@ -30,6 +30,14 @@ description: >
   API keys managed via the app dashboard, with SDKs available for Python, TypeScript,
   and Go.
 tags:
+  - Text-to-Speech
+  - Voice Synthesis
+  - Voice Cloning
+  - Audio Streaming
+  - Conversational AI
+  - Low Latency
+  - Real-Time Audio
+tags_raw:
   - text-to-speech
   - voice synthesis
   - voice cloning
@@ -47,6 +55,11 @@ apis:
   baseURL: wss://api.lmnt.com
   tags:
   - speech sessions
+  - WebSocket
+  - Real-Time
+  - Streaming
+  tags_raw:
+  - speech sessions
   - websocket
   - real-time
   - streaming
@@ -59,6 +72,8 @@ apis:
   humanURL: https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes
   baseURL: https://api.lmnt.com
   tags:
+  - Artificial Intelligence
+  tags_raw:
   - Ai
   properties:
   - type: OpenAPI
