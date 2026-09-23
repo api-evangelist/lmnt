@@ -1,9 +1,7 @@
 {
   "provider": "lmnt",
   "sources": [
-    "lmnt-ai-api-openapi.yml",
-    "lmnt-health-check-api-openapi.yml",
-    "lmnt-speech-api-openapi.yml"
+    "_original/lmnt-speech-openapi.yml"
   ],
   "outputs": [
     "lmnt-ai-api-openapi.yml",
@@ -13,6 +11,31 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "lmnt-speech-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "lmnt-speech-openapi.yml: tagged paths GET /v1/ai/speech -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths POST /v1/ai/speech -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths POST /v1/ai/speech/bytes -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths POST /v1/ai/speech/feedback -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths GET /v1/ai/voice/list -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths GET /v1/ai/voice/{id} -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths PUT /v1/ai/voice/{id} -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths DELETE /v1/ai/voice/{id} -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths POST /v1/ai/voice -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths GET /v1/ai/voice/{id}/preview -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths POST /v1/ai/voice/precheck -> Ai",
+    "lmnt-speech-openapi.yml: tagged paths POST /speech/beta/synthesize -> Speech",
+    "lmnt-speech-openapi.yml: tagged paths GET /speech/beta/voices -> Speech",
+    "lmnt-speech-openapi.yml: tagged paths GET /health_check -> Health Check",
+    "lmnt-speech-openapi.yml: declared missing tag: Ai",
+    "lmnt-speech-openapi.yml: declared missing tag: Health Check",
+    "lmnt-speech-openapi.yml: declared missing tag: Speech",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "lmnt-ai-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lmnt-health-check-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lmnt-speech-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

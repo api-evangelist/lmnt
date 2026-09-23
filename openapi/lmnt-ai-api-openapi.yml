@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: LMNT Speech Ai API
+  title: LMNT Speech AI API
   description: REST API for converting text to speech audio, supporting streaming binary audio output, 31 languages, voice cloning, word timestamps, and configurable expressiveness parameters.
   version: '1.1'
   termsOfService: https://www.lmnt.com/terms
@@ -19,7 +19,7 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: Ai
+- name: AI
 paths:
   /v1/ai/speech:
     get:
@@ -223,7 +223,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
     post:
       summary: Post Handler
       operationId: post_handler_v1_ai_speech_post
@@ -256,7 +256,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
   /v1/ai/speech/bytes:
     post:
       summary: Bytes Post Handler
@@ -290,7 +290,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
   /v1/ai/speech/feedback:
     post:
       summary: Feedback Handler
@@ -331,7 +331,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
   /v1/ai/voice/list:
     get:
       summary: List Handler
@@ -389,7 +389,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
   /v1/ai/voice/{id}:
     get:
       summary: Get Handler
@@ -430,7 +430,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
     put:
       summary: Update Handler
       description: 'If a user tries to update a voice that is not owned by them, this call will return an error unless ''starred'' is
@@ -481,7 +481,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
     delete:
       summary: Delete Handler
       operationId: delete_handler_v1_ai_voice__id__delete
@@ -521,7 +521,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
   /v1/ai/voice:
     post:
       summary: Create Handler
@@ -561,7 +561,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
   /v1/ai/voice/{id}/preview:
     get:
       summary: Preview Handler
@@ -586,7 +586,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
   /v1/ai/voice/precheck:
     post:
       summary: Precheck Clone Handler
@@ -627,101 +627,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
       tags:
-      - Ai
+      - AI
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Body_feedback_handler_v1_ai_speech_feedback_post:
-      properties:
-        id:
-          type: string
-          title: Id
-        rating:
-          type: string
-          enum:
-          - thumbsUp
-          - thumbsDown
-          title: Rating
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
-        context:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Context
-      type: object
-      required:
-      - id
-      - rating
-      title: Body_feedback_handler_v1_ai_speech_feedback_post
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    PrecheckCloneResponse:
-      properties:
-        dnsmos:
-          type: number
-          title: Dnsmos
-        start_s:
-          type: number
-          title: Start S
-        end_s:
-          type: number
-          title: End S
-      type: object
-      required:
-      - dnsmos
-      - start_s
-      - end_s
-      title: PrecheckCloneResponse
-    DeleteVoiceResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-      type: object
-      required:
-      - success
-      title: DeleteVoiceResponse
-    Body_precheck_clone_handler_v1_ai_voice_precheck_post:
-      properties:
-        file:
-          type: string
-          format: binary
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_precheck_clone_handler_v1_ai_voice_precheck_post
     Voice:
       properties:
         id:
@@ -791,6 +699,81 @@ components:
       - owner
       - type
       title: Voice
+    UpdateVoiceRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        gender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Gender
+        starred:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Starred
+        tags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tags
+      type: object
+      title: UpdateVoiceRequest
+    Body_precheck_clone_handler_v1_ai_voice_precheck_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_precheck_clone_handler_v1_ai_voice_precheck_post
+    Body_feedback_handler_v1_ai_speech_feedback_post:
+      properties:
+        id:
+          type: string
+          title: Id
+        rating:
+          type: string
+          enum:
+          - thumbsUp
+          - thumbsDown
+          title: Rating
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+        context:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Context
+      type: object
+      required:
+      - id
+      - rating
+      title: Body_feedback_handler_v1_ai_speech_feedback_post
+    UpdateVoiceResponse:
+      properties:
+        voice:
+          $ref: '#/components/schemas/Voice'
+      type: object
+      required:
+      - voice
+      title: UpdateVoiceResponse
     Body_create_handler_v1_ai_voice_post:
       properties:
         file:
@@ -878,6 +861,23 @@ components:
           title: Accent
       type: object
       title: Body_create_handler_v1_ai_voice_post
+    PrecheckCloneResponse:
+      properties:
+        dnsmos:
+          type: number
+          title: Dnsmos
+        start_s:
+          type: number
+          title: Start S
+        end_s:
+          type: number
+          title: End S
+      type: object
+      required:
+      - dnsmos
+      - start_s
+      - end_s
+      title: PrecheckCloneResponse
     SampleRate:
       type: integer
       enum:
@@ -885,6 +885,24 @@ components:
       - 16000
       - 24000
       title: SampleRate
+    DeleteVoiceResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: DeleteVoiceResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     FeedbackResponse:
       properties:
         success:
@@ -894,45 +912,27 @@ components:
       required:
       - success
       title: FeedbackResponse
-    UpdateVoiceResponse:
+    ValidationError:
       properties:
-        voice:
-          $ref: '#/components/schemas/Voice'
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - voice
-      title: UpdateVoiceResponse
-    UpdateVoiceRequest:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        gender:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Gender
-        starred:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Starred
-        tags:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Tags
-      type: object
-      title: UpdateVoiceRequest
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
