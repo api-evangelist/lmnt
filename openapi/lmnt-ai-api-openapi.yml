@@ -630,6 +630,14 @@ paths:
       - AI
 components:
   schemas:
+    UpdateVoiceResponse:
+      properties:
+        voice:
+          $ref: '#/components/schemas/Voice'
+      type: object
+      required:
+      - voice
+      title: UpdateVoiceResponse
     Voice:
       properties:
         id:
@@ -699,81 +707,6 @@ components:
       - owner
       - type
       title: Voice
-    UpdateVoiceRequest:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        gender:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Gender
-        starred:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Starred
-        tags:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Tags
-      type: object
-      title: UpdateVoiceRequest
-    Body_precheck_clone_handler_v1_ai_voice_precheck_post:
-      properties:
-        file:
-          type: string
-          format: binary
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_precheck_clone_handler_v1_ai_voice_precheck_post
-    Body_feedback_handler_v1_ai_speech_feedback_post:
-      properties:
-        id:
-          type: string
-          title: Id
-        rating:
-          type: string
-          enum:
-          - thumbsUp
-          - thumbsDown
-          title: Rating
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
-        context:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Context
-      type: object
-      required:
-      - id
-      - rating
-      title: Body_feedback_handler_v1_ai_speech_feedback_post
-    UpdateVoiceResponse:
-      properties:
-        voice:
-          $ref: '#/components/schemas/Voice'
-      type: object
-      required:
-      - voice
-      title: UpdateVoiceResponse
     Body_create_handler_v1_ai_voice_post:
       properties:
         file:
@@ -861,57 +794,6 @@ components:
           title: Accent
       type: object
       title: Body_create_handler_v1_ai_voice_post
-    PrecheckCloneResponse:
-      properties:
-        dnsmos:
-          type: number
-          title: Dnsmos
-        start_s:
-          type: number
-          title: Start S
-        end_s:
-          type: number
-          title: End S
-      type: object
-      required:
-      - dnsmos
-      - start_s
-      - end_s
-      title: PrecheckCloneResponse
-    SampleRate:
-      type: integer
-      enum:
-      - 8000
-      - 16000
-      - 24000
-      title: SampleRate
-    DeleteVoiceResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-      type: object
-      required:
-      - success
-      title: DeleteVoiceResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    FeedbackResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-      type: object
-      required:
-      - success
-      title: FeedbackResponse
     ValidationError:
       properties:
         loc:
@@ -933,6 +815,124 @@ components:
       - msg
       - type
       title: ValidationError
+    PrecheckCloneResponse:
+      properties:
+        dnsmos:
+          type: number
+          title: Dnsmos
+        start_s:
+          type: number
+          title: Start S
+        end_s:
+          type: number
+          title: End S
+      type: object
+      required:
+      - dnsmos
+      - start_s
+      - end_s
+      title: PrecheckCloneResponse
+    FeedbackResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: FeedbackResponse
+    SampleRate:
+      type: integer
+      enum:
+      - 8000
+      - 16000
+      - 24000
+      title: SampleRate
+    UpdateVoiceRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        gender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Gender
+        starred:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Starred
+        tags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tags
+      type: object
+      title: UpdateVoiceRequest
+    Body_feedback_handler_v1_ai_speech_feedback_post:
+      properties:
+        id:
+          type: string
+          title: Id
+        rating:
+          type: string
+          enum:
+          - thumbsUp
+          - thumbsDown
+          title: Rating
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+        context:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Context
+      type: object
+      required:
+      - id
+      - rating
+      title: Body_feedback_handler_v1_ai_speech_feedback_post
+    Body_precheck_clone_handler_v1_ai_voice_precheck_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_precheck_clone_handler_v1_ai_voice_precheck_post
+    DeleteVoiceResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: DeleteVoiceResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
