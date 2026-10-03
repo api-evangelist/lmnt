@@ -630,6 +630,32 @@ paths:
       - AI
 components:
   schemas:
+    Body_feedback_handler_v1_ai_speech_feedback_post:
+      properties:
+        id:
+          type: string
+          title: Id
+        rating:
+          type: string
+          enum:
+          - thumbsUp
+          - thumbsDown
+          title: Rating
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+        context:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Context
+      type: object
+      required:
+      - id
+      - rating
+      title: Body_feedback_handler_v1_ai_speech_feedback_post
     UpdateVoiceResponse:
       properties:
         voice:
@@ -638,38 +664,44 @@ components:
       required:
       - voice
       title: UpdateVoiceResponse
-    Voice:
+    ValidationError:
       properties:
-        id:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        state:
-          type: string
-          enum:
-          - preparing
-          - pending
-          - training
-          - ready
-          - broken
-          - cancelled
-          title: State
-        owner:
-          type: string
-          enum:
-          - system
-          - me
-          - all
-          title: Owner
+          title: Message
         type:
           type: string
-          enum:
-          - instant
-          - professional
-          - intrinsic
-          title: Type
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Body_precheck_clone_handler_v1_ai_voice_precheck_post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_precheck_clone_handler_v1_ai_voice_precheck_post
+    UpdateVoiceRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
         description:
           anyOf:
           - type: string
@@ -692,21 +724,8 @@ components:
             type: array
           - type: 'null'
           title: Tags
-        preview_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Preview Url
       type: object
-      required:
-      - id
-      - name
-      - state
-      - owner
-      - type
-      title: Voice
+      title: UpdateVoiceRequest
     Body_create_handler_v1_ai_voice_post:
       properties:
         file:
@@ -794,27 +813,91 @@ components:
           title: Accent
       type: object
       title: Body_create_handler_v1_ai_voice_post
-    ValidationError:
+    SampleRate:
+      type: integer
+      enum:
+      - 8000
+      - 16000
+      - 24000
+      title: SampleRate
+    HTTPValidationError:
       properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Voice:
+      properties:
+        id:
           type: string
-          title: Message
+          title: Id
+        name:
+          type: string
+          title: Name
+        state:
+          type: string
+          enum:
+          - preparing
+          - pending
+          - training
+          - ready
+          - broken
+          - cancelled
+          title: State
+        owner:
+          type: string
+          enum:
+          - system
+          - me
+          - all
+          title: Owner
         type:
           type: string
-          title: Error Type
+          enum:
+          - instant
+          - professional
+          - intrinsic
+          title: Type
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        gender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Gender
+        starred:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Starred
+        tags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tags
+        preview_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Preview Url
       type: object
       required:
-      - loc
-      - msg
+      - id
+      - name
+      - state
+      - owner
       - type
-      title: ValidationError
+      title: Voice
     PrecheckCloneResponse:
       properties:
         dnsmos:
@@ -841,80 +924,6 @@ components:
       required:
       - success
       title: FeedbackResponse
-    SampleRate:
-      type: integer
-      enum:
-      - 8000
-      - 16000
-      - 24000
-      title: SampleRate
-    UpdateVoiceRequest:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        gender:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Gender
-        starred:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Starred
-        tags:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Tags
-      type: object
-      title: UpdateVoiceRequest
-    Body_feedback_handler_v1_ai_speech_feedback_post:
-      properties:
-        id:
-          type: string
-          title: Id
-        rating:
-          type: string
-          enum:
-          - thumbsUp
-          - thumbsDown
-          title: Rating
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
-        context:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Context
-      type: object
-      required:
-      - id
-      - rating
-      title: Body_feedback_handler_v1_ai_speech_feedback_post
-    Body_precheck_clone_handler_v1_ai_voice_precheck_post:
-      properties:
-        file:
-          type: string
-          format: binary
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_precheck_clone_handler_v1_ai_voice_precheck_post
     DeleteVoiceResponse:
       properties:
         success:
@@ -924,15 +933,6 @@ components:
       required:
       - success
       title: DeleteVoiceResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
