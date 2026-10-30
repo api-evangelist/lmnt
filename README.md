@@ -1,4 +1,4 @@
-# LMNT (lmnt)
+# LMNT
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,86 +64,156 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-LMNT is a text-to-speech API platform delivering ultra-low latency voice synthesis with streaming audio output designed for real-time conversational AI applications. The platform provides a Speech API for standard text-to-speech generation and a Speech Sessions API for WebSocket-based real-time streaming integrated with LLM pipelines, achieving latency under 300 milliseconds. LMNT supports 31 languages and offers voice cloning from as little as five seconds of audio, with its Blizzard 2 model optimized for accuracy, expressiveness, and pronunciation across diverse accents and styles.
+LMNT is a text-to-speech API platform delivering ultra-low latency voice synthesis with streaming audio output designed for real-time conversational AI applications. The platform provides a Speech API for standard text-to-speech generation and a Speech Sessions API for WebSocket-based real-time streaming integrated with LLM pipelines, achieving latency under 300 milliseconds. LMNT supports 31 languages and offers voice cloning from as little as five seconds of audio, with its Blizzard 2 model optimized for accuracy, expressiveness, and pronunciation. Authentication uses API keys managed via the app dashboard, with SDKs available for Python, TypeScript, and Go.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/lmnt/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/lmnt/refs/heads/main/apis.yml)
+**Areas:** Text-to-Speech · Voice Synthesis · Voice Cloning · Audio Streaming · Conversational AI · Low Latency · Real-Time Audio
 
-**Naftiko:** [https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=lmnt-api-evangelist&utm_content=repo](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=lmnt-api-evangelist&utm_content=repo)
+## LMNT on APIs.io
 
-## Tags
+Everything profiled for LMNT is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/lmnt/](https://apis.io/providers/lmnt/)** — or go straight to one of the APIs or properties below.
 
-- text-to-speech
-- voice synthesis
-- voice cloning
-- audio streaming
-- conversational AI
-- low latency
-- real-time audio
+### APIs (4)
 
-## APIs
+- [LMNT Speech Sessions API](https://apis.io/apis/lmnt/lmnt-speech-sessions-api/) — WebSocket-based real-time speech generation API for streaming LLM text output to synthesized audio with reset-latency support for conversational AI…
+- [LMNT Ai API](https://apis.io/apis/lmnt/lmnt-ai-api/) — The Ai API from LMNT — 8 operation(s) for ai.
+- [LMNT Health Check API](https://apis.io/apis/lmnt/lmnt-health-check-api/) — The Health Check API from LMNT — 1 operation(s) for health check.
+- [LMNT Speech API](https://apis.io/apis/lmnt/lmnt-speech-api/) — The Speech API from LMNT — 2 operation(s) for speech.
 
-### LMNT Speech API
+### Published properties
 
-REST API for converting text to speech audio, supporting streaming binary audio output, 31 languages, voice cloning, word timestamps, and configurable expressiveness parameters. Endpoint: `POST /v1/ai/speech/bytes`. Authentication via `X-API-Key` header. Maximum 5,000 characters per request.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Documentation:** [https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes](https://docs.lmnt.com/api-reference/speech/synthesize-speech-bytes)
+#### Agentic access (1)
 
-### LMNT Speech Sessions API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-WebSocket-based real-time speech generation API for streaming LLM text output to synthesized audio with reset-latency support for conversational AI applications requiring interrupt handling. Uses API version 1.2 with word timestamp improvements.
+- [Lmnt Agentic Access](https://apis.io/agentic-access/lmnt/lmnt-agentic-access/)
 
-- **Documentation:** [https://docs.lmnt.com/api-reference/speech/generate-speech-session](https://docs.lmnt.com/api-reference/speech/generate-speech-session)
+#### JSON Schema (2)
 
-## Plans, Rate Limits, and FinOps
+The data models the API reads and writes.
 
-### Plans
+- [LMNT Speech Synthesis Request](https://apis.io/schemas/lmnt/lmnt-speech-synthesis/)
+- [LMNT Voice](https://apis.io/schemas/lmnt/lmnt-voice/)
 
-LMNT offers four self-serve pricing tiers plus a custom enterprise option:
+#### JSON-LD (1)
 
-| Plan | Price | Included Characters | Overage Rate |
-|---|---|---|---|
-| Free | $0/month | 15,000 | None (quota hard stop) |
-| Indie | $10/month | 200,000 | $0.05 per 1K characters |
-| Pro | $49/month | 1,250,000 | $0.045 per 1K characters |
-| Premium | $199/month | 5,700,000 | $0.035 per 1K characters |
-| Enterprise | Custom | Custom | Negotiated |
+Linked-data contexts for the provider's vocabulary.
 
-Paid plans (Indie and above) include a commercial license and unlimited voice clones.
+- [Lmnt Context](https://apis.io/jsonld/lmnt/lmnt-context/)
 
-- **Plans file:** [plans/lmnt-plans-pricing.yml](plans/lmnt-plans-pricing.yml)
+#### Vocabulary (1)
 
-### Rate Limits
+The provider's domain terms, defined.
 
-Paid plans carry no concurrency or request rate limits. Free accounts are subject to monthly character quotas. Individual requests are capped at 5,000 characters of input. API v1.1+ returns a `request-id` header on every response.
+- [LMNT API Vocabulary](https://apis.io/vocabularies/lmnt/lmnt-vocabulary/)
 
-- **Rate Limits file:** [rate-limits/lmnt-rate-limits.yml](rate-limits/lmnt-rate-limits.yml)
+#### Examples (2)
 
-### FinOps
+Example requests and responses.
 
-LMNT uses a subscription plus metered overage model billed monthly in USD. The primary cost meter is characters synthesized. Upgrading subscription tiers reduces per-character overage rates and provides larger included allotments.
+- [Lmnt Speech Synthesis Request](https://apis.io/examples/lmnt/lmnt-speech-synthesis-request/)
+- [Lmnt Voice List Response](https://apis.io/examples/lmnt/lmnt-voice-list-response/)
 
-- **FinOps file:** [finops/lmnt-finops.yml](finops/lmnt-finops.yml)
+#### Collections (3)
 
-## Timestamps
+Postman and Open Collection request collections.
 
-- **Created:** 2026-06-12
-- **Modified:** 2026-06-12
+- [LMNT Speech Ai API](https://apis.io/collections/lmnt/open-lmnt-ai-api/)
+- [LMNT Speech Ai Health Check API](https://apis.io/collections/lmnt/open-lmnt-health-check-api/)
+- [LMNT Ai Speech API](https://apis.io/collections/lmnt/open-lmnt-speech-api/)
 
-## Common Properties
+#### Governance rules (1)
 
-| Type | URL |
+Spectral rulesets for the provider's contracts.
+
+- [LMNT — jsonschema rules](https://apis.io/rules/lmnt/lmnt-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Lmnt Authentication](https://apis.io/security/lmnt/lmnt-authentication/)
+- [Lmnt Domain Security](https://apis.io/security/lmnt/lmnt-domain-security/)
+- [Lmnt Trust Center](https://apis.io/security/lmnt/lmnt-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Lmnt Plans Pricing](https://apis.io/plans/lmnt/lmnt-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Lmnt Rate Limits](https://apis.io/rate-limits/lmnt/lmnt-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Lmnt Finops](https://apis.io/finops/lmnt/lmnt-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.lmnt.com/)
+- [Documentation](https://docs.lmnt.com/)
+- [Pricing](https://www.lmnt.com/pricing)
+- [Changelog](https://docs.lmnt.com/changelog/overview)
+- [GitHub](https://github.com/lmnt-com)
+
+## API Evangelist rating
+
+**Kin Score 35.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| Website | [https://www.lmnt.com/](https://www.lmnt.com/) |
-| Documentation | [https://docs.lmnt.com/](https://docs.lmnt.com/) |
-| GitHub Organization | [https://github.com/lmnt-com](https://github.com/lmnt-com) |
-| LinkedIn | [https://www.linkedin.com/company/lmnt](https://www.linkedin.com/company/lmnt) |
-| X | [https://x.com/lmnt_com](https://x.com/lmnt_com) |
-| Pricing | [https://www.lmnt.com/pricing](https://www.lmnt.com/pricing) |
-| Changelog | [https://docs.lmnt.com/changelog/overview](https://docs.lmnt.com/changelog/overview) |
-| Plans | [plans/lmnt-plans-pricing.yml](plans/lmnt-plans-pricing.yml) |
-| Rate Limits | [rate-limits/lmnt-rate-limits.yml](rate-limits/lmnt-rate-limits.yml) |
-| FinOps | [finops/lmnt-finops.yml](finops/lmnt-finops.yml) |
+| Discoverability | 66.1 |
+| Contract quality | 53.5 |
+| Contract governance | 23.5 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 26.3 |
 
-## Maintainers
+**Agent readiness 23.7** — agent-aware
 
-- **Kin Lane** — [kin@apievangelist.com](mailto:kin@apievangelist.com)
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.8** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/lmnt/](https://apis.io/providers/lmnt/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for LMNT: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/lmnt/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
